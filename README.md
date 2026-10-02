@@ -46,7 +46,6 @@ Target: `https://medirozahospital.com`
 - [Reconnaissance](#-reconnaissance)
 - [Findings](#-findings)
 - [Overall Risk Summary](#-overall-risk-summary)
-- [Milestone Completion Summary](#-milestone-completion-summary)
 - [Recommendations](#-recommendations)
 - [Evidence Handling & Redaction](#-evidence-handling--redaction)
 - [Conclusion](#-conclusion)
@@ -384,7 +383,7 @@ robots.txt -> /old/ -> directory listing -> mediroza_db_backup_2019.sql -> unaut
 This engagement involved real (simulated) patient, staff, and shareholder data categories. In line with the original report's guidance:
 
 - Evidence containing patient, employee, or shareholder information should be redacted before any distributed version of a report is shared.
-- Recovered PDF passwords are intentionally **omitted** from this summary.
+- Recovered PDF passwords are intentionally omitted from this summary.
 - Original unredacted evidence should be retained only in an authorized, access-controlled evidence repository.
 
 ---
