@@ -251,6 +251,11 @@ Networkwalks hash calculator
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223222.png?raw=true)
 
 
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223642.png?raw=true)
+
+
+
+
 # Crack with password cracker using (password.txt) custom wordlist
 
 Networkwalks password cracker 
@@ -258,11 +263,17 @@ Networkwalks password cracker
 
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223422.png?raw=true)
 
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223728.png?raw=true)
+
+
+
 
 THE SAME PROCESS WAS REPEATED INDEPENDENTLY FOR REPORTS 2 & 3.
 
 
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223528.png?raw=true)
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20225335.png?raw=true)
 
 
 
@@ -369,7 +380,7 @@ robots.txt -> /old/ -> directory listing -> mediroza_db_backup_2019.sql -> unaut
 
 This engagement involved real (simulated) patient, staff, and shareholder data categories. In line with the original report's guidance:
 
-- Evidence containing patient, employee, or shareholder information should be **redacted before any distributed version** of a report is shared.
+- Evidence containing patient, employee, or shareholder information should be redacted before any distributed version of a report is shared.
 - Recovered PDF passwords are intentionally **omitted** from this summary.
 - Original unredacted evidence should be retained only in an authorized, access-controlled evidence repository.
 
