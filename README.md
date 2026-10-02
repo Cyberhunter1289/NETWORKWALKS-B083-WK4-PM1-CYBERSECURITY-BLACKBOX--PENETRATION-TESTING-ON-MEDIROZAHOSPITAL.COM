@@ -248,7 +248,7 @@ SQL Injection -> Authentication Bypass -> Patient Portal -> 3 Encrypted Reports
 Networkwalks hash calculator 
 
 
-![Image Alt]https:(https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223222.png?raw=true)
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223222.png?raw=true)
 
 
 # Crack with password cracker using (password.txt) custom wordlist
