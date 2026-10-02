@@ -321,3 +321,30 @@ robots.txt -> /old/ -> directory listing -> mediroza_db_backup_2019.sql -> unaut
 - Share class
   
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20230718.png?raw=true)
+
+**Impact:** Unauthorized disclosure of employee PII, contact and national ID information, employment and salary data, and shareholder/ownership information — directly accessible over HTTP(S) with no authentication, and useful for follow-on targeted attacks.
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20230748.png?raw=true)
+
+**Recommendations:**
+- Remove database backups from publicly accessible web directories
+- Store backups outside the web server document root
+- Implement strict access controls for backup files
+- Disable directory listing on the web server
+- Remove obsolete/legacy directories such as `/old/`
+- Audit the web root for exposed `.sql`, `.bak`, `.zip`, `.tar` and similar files
+- Establish secure backup storage procedures
+- Prevent backup files from being served over HTTP/HTTPS
+- Perform periodic external checks for exposed backup files
+
+---
+
+## Overall Risk Summary
+
+| ID | Finding | Severity | Confidentiality Impact | Priority |
+|---|---|---|---|---|
+| F-01 | SQL Injection -> Patient Portal Authentication Bypass | Critical | Severe | Immediate |
+| F-02 | Weak Password Protection on Patient Reports | High | High | High |
+| F-03 | Unauthenticated Database Backup Exposure | Critical | Severe | Immediate |
+
+**Prioritization:** Remediate F-01 and F-03 immediately. F-02 should follow as a high-priority remediation since it directly weakens protection of already-sensitive patient reports.
