@@ -243,7 +243,7 @@ SQL Injection -> Authentication Bypass -> Patient Portal -> 3 Encrypted Reports
 
 **Technical Procedure:**
 
-# Extract hash from locked.pdf
+# Extract hash from locked patient.pdf
 
 Networkwalks hash calculator 
 
@@ -281,3 +281,43 @@ The same process was repeated independently for reports 2 and 3.
 - Prefer application-level authorization and secure document delivery over distributed passwords
 - Use stronger document encryption mechanisms
 - Review access controls for all sensitive documents
+
+### F-03 — Unauthenticated Exposure of Internal Database Backup
+**Severity: CRITICAL**
+
+| Attribute | Details |
+|---|---|
+| Affected Resource | `https://medirozahospital.com/old/` |
+| Exposed File | `/old/mediroza_db_backup_2019.sql` |
+| Category | Sensitive Information Exposure / Exposure of Backup File |
+| CWE | CWE-530 — Exposure of Backup File |
+| Primary Impact | Unauthorized disclosure of internal staff and shareholder records |
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-02%20024756.png?raw=true)
+
+**Discovery Chain:**
+
+robots.txt -> /old/ -> directory listing -> mediroza_db_backup_2019.sql -> unauthenticated access
+
+
+**Description:** `robots.txt` disclosed the `/old/` path (alongside `/patient/` and `/staff/`). Accessing `/old/` revealed a public directory listing containing a SQL database backup, viewable directly through the browser without any authentication.
+
+> **Note:** `robots.txt` is not an access-control mechanism — the impact arises because the disclosed `/old/` resource was itself publicly accessible.
+
+**Data exposed in the backup:**
+
+*Staff table:*
+- Full name, job title, department
+- Email address and telephone number
+- National identification number
+- Monthly salary
+- Date joined
+
+*Shareholders table:*
+- Shareholder name
+- Share percentage
+- Shares held
+- Share class
+  
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20230718.png?raw=true)
