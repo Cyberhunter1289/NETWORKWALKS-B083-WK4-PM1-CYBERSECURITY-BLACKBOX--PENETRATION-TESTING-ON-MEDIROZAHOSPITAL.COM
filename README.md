@@ -132,7 +132,7 @@ Phase 6  Further Exposure Check -> robots.txt -> /old/ -> exposed DB backup
 |---|---|
 | whois.domaintools |Information Gathering about DNS and Databases |
 | whatweb | Identify the Technologies running on a Server |
-| wafw00f |  | Check if there's a Firewall Protecting packets |
+| wafw00f | Check if there's a Firewall Protecting the packets |
 | Nmap | Mapping Out Entire Network, Hosts and Infrastructure |
 | ICMP / ping | Basic host connectivity testing |
 | cURL | HTTP response and application reconnaissance |
@@ -175,4 +175,58 @@ This disclosed HTTP/application details including PHP, LiteSpeed, Mediroza CMS v
 
 
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20222158.png?raw=true)
+
+## Findings
+
+### F-01 — SQL Injection Leading to Patient Portal Authentication Bypass
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20222422.png?raw=true)
+
+
+**Severity: CRITICAL**
+
+| Attribute | Details |
+|---|---|
+| Affected Component | `https://medirozahospital.com/patient/login.php` |
+| Category | SQL Injection / Authentication Bypass |
+| CWE | CWE-89 — Improper Neutralization of Special Elements used in an SQL Command |
+| Primary Impact | Unauthorized access to confidential patient laboratory reports |
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20222349.png?raw=true)
+
+
+**Description:** The patient portal login was vulnerable to SQL injection. Malformed input first produced a MySQL syntax error, and the following username payload achieved a full authentication bypass:
+
+
+admin'--
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20222824.png?raw=true)
+
+
+
+This bypassed the authentication logic entirely, granting access to the patient portal and exposing three password-protected pathology reports.
+
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20222915.png?raw=true)
+
+
+
+**Attack Chain:**
+```
+SQL Injection -> Authentication Bypass -> Patient Portal -> 3 Encrypted Reports
+   -> PDF Hash Extraction -> Dictionary Attack -> Password Recovery -> Report Access
+```
+
+**Recommendations:**
+- Use parameterized queries / prepared statements for all database queries
+- Never construct SQL by concatenating user-controlled input
+- Implement server-side input validation
+- Disable detailed database error messages in production; return generic auth errors
+- Implement strong authentication and secure password storage
+- Apply authorization checks after authentication
+- Review other authentication endpoints for the same weakness
+- Perform regression testing after remediation
 
