@@ -259,7 +259,7 @@ Networkwalks password cracker
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223422.png?raw=true)
 
 
-The same process was repeated independently for reports 2 and 3.
+THE SAME PROCESS WAS REPEATED INDEPENDENTLY FOR REPORTS 2 & 3.
 
 
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223528.png?raw=true)
@@ -337,8 +337,6 @@ robots.txt -> /old/ -> directory listing -> mediroza_db_backup_2019.sql -> unaut
 - Prevent backup files from being served over HTTP/HTTPS
 - Perform periodic external checks for exposed backup files
 
----
-
 ## Overall Risk Summary
 
 | ID | Finding | Severity | Confidentiality Impact | Priority |
@@ -348,3 +346,47 @@ robots.txt -> /old/ -> directory listing -> mediroza_db_backup_2019.sql -> unaut
 | F-03 | Unauthenticated Database Backup Exposure | Critical | Severe | Immediate |
 
 **Prioritization:** Remediate F-01 and F-03 immediately. F-02 should follow as a high-priority remediation since it directly weakens protection of already-sensitive patient reports.
+
+## Recommendations
+
+### Priority 1 — Immediate
+- Fix the SQL injection with parameterized queries across all authentication endpoints
+- Remove `/old/mediroza_db_backup_2019.sql` from the public web root
+- Disable directory listing site-wide
+
+### Priority 2 — High
+- Replace weak/static PDF passwords with strong secrets or application-level authorization for report delivery
+- Disable verbose database error disclosure in production
+
+### Priority 3 — Ongoing
+- Store backups outside the web root, encrypted at rest, with restricted access
+- Periodically audit the web root for legacy/forgotten resources and exposed backup files
+- Conduct a validation re-test after remediation
+
+---
+
+## Evidence Handling & Redaction
+
+This engagement involved real (simulated) patient, staff, and shareholder data categories. In line with the original report's guidance:
+
+- Evidence containing patient, employee, or shareholder information should be **redacted before any distributed version** of a report is shared.
+- Recovered PDF passwords are intentionally **omitted** from this summary.
+- Original unredacted evidence should be retained only in an authorized, access-controlled evidence repository.
+
+---
+
+## Conclusion
+
+The assessment identified significant weaknesses across input validation, SQL query construction, authentication controls, sensitive-data access controls, document password management, web-server file exposure, backup management, and legacy resource handling. The Critical SQL injection and database backup exposure findings should be remediated first, followed by the High weak-password-protection finding. A validation assessment is recommended after remediation to confirm the issues have been resolved.
+
+---
+
+## Disclaimer
+
+This report was prepared solely for Mediroza General Hospital in connection with an authorized penetration testing and vulnerability assessment. Testing was restricted to the target domain; social engineering and denial-of-service testing were explicitly excluded. This document contains security-sensitive assessment information and should be handled as confidential.
+
+
+**Tags:** `penetration-testing` `web-security` `sql-injection` `authentication-bypass` `information-disclosure` `password-cracking` `hashcat` `pdf-security` `vulnerability-assessment`
+
+*Prepared by OPEYEMI AROWOSAFE · Report Date: 01 September 2026*
+
