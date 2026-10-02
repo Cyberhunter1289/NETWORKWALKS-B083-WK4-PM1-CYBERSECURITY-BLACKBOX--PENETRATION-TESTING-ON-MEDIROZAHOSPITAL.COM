@@ -386,7 +386,7 @@ The assessment identified significant weaknesses across input validation, SQL qu
 This report was prepared solely for Mediroza General Hospital in connection with an authorized penetration testing and vulnerability assessment. Testing was restricted to the target domain; social engineering and denial-of-service testing were explicitly excluded. This document contains security-sensitive assessment information and should be handled as confidential.
 
 
-**Tags:** `penetration-testing` `web-security` `sql-injection` `authentication-bypass` `information-disclosure` `password-cracking` `hashcat` `pdf-security` `vulnerability-assessment`
+**Tags:** `penetration-testing` `web-security` `sql-injection` `authentication-bypass` `information-disclosure` `password-cracking` `hash calculator` `pdf-security` `vulnerability-assessment`
 
-*Prepared by OPEYEMI AROWOSAFE · Report Date: 01 September 2026*
+*Prepared by OPEYEMI AROWOSAFE · Report Date: 01 October 2026*
 
