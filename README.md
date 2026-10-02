@@ -223,10 +223,61 @@ SQL Injection -> Authentication Bypass -> Patient Portal -> 3 Encrypted Reports
 **Recommendations:**
 - Use parameterized queries / prepared statements for all database queries
 - Never construct SQL by concatenating user-controlled input
-- Implement server-side input validation
 - Disable detailed database error messages in production; return generic auth errors
 - Implement strong authentication and secure password storage
 - Apply authorization checks after authentication
 - Review other authentication endpoints for the same weakness
 - Perform regression testing after remediation
 
+### F-02 — Weak Password Protection on Confidential Patient Reports
+**Severity: HIGH**
+
+| Attribute | Details |
+|---|---|
+| Affected Components | Three password-protected patient laboratory reports |
+| Category | Weak Password / Insufficient Protection of Sensitive Files |
+| CWE | CWE-521 — Weak Password Requirements |
+| Primary Impact | Recovery of passwords protecting sensitive patient reports |
+
+**Description:** All three encrypted PDF reports obtained via F-01 had their password protection defeated using Networkwalks hash calculator, password cracker recovery. Hashes were extracted with hash calculator and cracked with password cracker using the custom wordlist `password.txt`. Different passwords were recovered for each report; all three opened successfully.
+
+**Technical Procedure:**
+
+# Extract hash from locked.pdf
+
+Networkwalks hash calculator 
+
+
+![Image Alt]https:(https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223222.png?raw=true)
+
+
+# Crack with password cracker using (password.txt) custom wordlist
+
+Networkwalks password cracker 
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223422.png?raw=true)
+
+
+The same process was repeated independently for reports 2 and 3.
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223528.png?raw=true)
+
+
+
+**Impact:** The reports contained patient name and identifier, date of birth and gender, lab reference/specimen data, referring physician information, clinical test results and reference ranges, and abnormality flags — a loss of confidentiality.
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223548.png?raw=true)
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223556.png?raw=true)
+
+
+
+**Recommendations:**
+- Use strong, randomly generated passwords for sensitive PDFs
+- Avoid deriving document passwords from predictable patient information
+- Prefer application-level authorization and secure document delivery over distributed passwords
+- Use stronger document encryption mechanisms
+- Review access controls for all sensitive documents
