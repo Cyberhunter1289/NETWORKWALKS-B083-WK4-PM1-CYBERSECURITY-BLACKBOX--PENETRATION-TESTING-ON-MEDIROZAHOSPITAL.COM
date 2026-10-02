@@ -1,2 +1,178 @@
 # NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX-PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM
 This is the Networkwalks B083 Week 4 Blackbox Penetration Testing on Medirozahospital.com with a written permission and scope
+
+**Black-Box Web Application Penetration Test & Vulnerability Assessment**
+
+| | |
+|---|---|
+| **Target** | `https://medirozahospital.com` |
+| **Client** | Mediroza General Hospital |
+| **Assessment Type** | Full Black-box Web Application Penetration Test |
+| **Assessment Period** | 27 September 2026 – 01 October 2026 |
+| **Duration** | 5 days |
+| **Testing Environment** | Kali Linux (VirtualBox) |
+| **Authorization** | Written Authorization provided by the client |
+| **Excluded Activities** | Social Engineering, Denial-of-Service, Out-of-Scope Testing |
+| **Prepared By** | OPEYEMI AROWOSAFE |
+| **Classification** | CONFIDENTIAL |
+
+> This document summarizes a confidential assessment report. Evidence containing patient, staff, or shareholder data that has been exposed.
+
+## NetworkWalks
+
+```
+N E T W O R K W A L K S
+```
+
+**Penetration Testing Project — Mediroza General Hospital**
+Batch B083 | Week 4
+Target: `https://medirozahospital.com`
+
+| | |
+|---|---|
+| **Client** | Mediroza General Hospital |
+| **Type** | Black-box Pentest |
+| **Duration** | 5 Days |
+
+> This project was conducted in a controlled environment for educational purposes only. These techniques must never be applied to any system without explicit written permission from the owner.
+
+## Table of Contents
+
+- [Purpose](#-purpose)
+- [Executive Summary](#-executive-summary)
+- [Scope & Rules of Engagement](#-scope--rules-of-engagement)
+- [Methodology](#-methodology)
+- [Tools & Techniques](#-tools--techniques)
+- [Reconnaissance](#-reconnaissance)
+- [Findings](#-findings)
+- [Overall Risk Summary](#-overall-risk-summary)
+- [Milestone Completion Summary](#-milestone-completion-summary)
+- [Recommendations](#-recommendations)
+- [Evidence Handling & Redaction](#-evidence-handling--redaction)
+- [Conclusion](#-conclusion)
+- [Disclaimer](#-disclaimer)
+
+---
+
+## Purpose
+
+The purpose of this engagement was to help improve the security of the Mediroza General Hospital Web Application under an Authorized black-box test, identify security weaknesses, and demonstrate their practical impact through controlled exploitation.
+
+The assessment addressed three trainer-defined milestones:
+
+1. Attack the website and locate the 3 confidential PDF lab reports of patients.
+2. Crack the encryption on all 3 retrieved files.
+3. Find the critical data exposure on the client server.
+
+---
+
+## Executive Summary
+
+A five-day black-box penetration test was conducted against the Mediroza General Hospital web application. Testing identified significant weaknesses affecting **authentication**, **protection of confidential patient reports**, and **exposure of internal organizational data**.
+
+The most significant finding was a **SQL injection vulnerability** in the patient portal authentication mechanism. A MySQL syntax error confirmed that user-controlled input reached backend SQL processing, and further testing demonstrated a full **authentication bypass**. This exposed three password-protected pathology laboratory reports, whose passwords were subsequently recovered via **Networkwalks hash calculator and password cracker** 
+
+A separate, unrelated critical exposure was identified through `robots.txt`, which disclosed a legacy `/old/` path. That path served a public directory listing containing an **unauthenticated internal SQL database backup** with confidential staff and shareholder records.
+
+**Overall Risk: CRITICAL** — two Critical findings and one High finding were demonstrated.
+
+| ID | Finding | Severity | Primary Impact |
+|---|---|---|---|
+| F-01 | SQL Injection -> Patient Portal Authentication Bypass | Critical | Unauthorized access to patient reports |
+| F-02 | Weak Password Protection on Patient Reports | High | Recovery of passwords protecting sensitive reports |
+| F-03 | Unauthenticated Exposure of Internal Database Backup | Critical | Exposure of staff/shareholder records |
+
+**Sensitive data categories demonstrated as exposed:**
+
+- Patient personally identifiable information (PII)
+- Patient laboratory / health information
+- Staff personal and employment information
+- Staff contact and national identification information
+- Staff salary information
+- Shareholder and ownership information
+
+---
+
+## Scope & Rules of Engagement
+
+**In scope:**
+```
+https://medirozahospital.com
+```
+
+**Rules of Engagement:**
+- Testing limited strictly to the target domain
+- Social engineering excluded
+- Denial-of-service testing excluded
+- Testing outside the agreed scope prohibited
+- Conducted under written client authorization
+
+**Environment covered:** public site, patient-facing functionality, staff authentication functionality, and legacy web resources.
+
+---
+
+## Methodology
+
+Testing followed the three trainer-supplied milestones, performed manually via browser and Linux CLI tooling, with controlled exploitation limited to the authorized target.
+
+```
+Phase 1  Reconnaissance         -> whois.domaintools, whatweb, wafw00f, nmap, curl -i, robots.txt review
+Phase 2  Authentication Testing -> SQL injection probing on patient login
+Phase 3  Exploitation            -> auth bypass -> patient portal access
+Phase 4  Data Extraction         -> 3 encrypted lab report PDFs retrieved
+Phase 5  Offline Cracking        -> hash calculator, password checker -> all 3 recovered
+Phase 6  Further Exposure Check -> robots.txt -> /old/ -> exposed DB backup
+```
+
+---
+
+## Tools & Techniques
+
+| Tool / Technique | Purpose |
+|---|---|
+| whois.domaintools |Information Gathering about DNS and Databases |
+| whatweb | Identify the Technologies running on a Server |
+| wafw00f |  | Check if there's a Firewall Protecting packets |
+| Nmap | Mapping Out Entire Network, Hosts and Infrastructure |
+| ICMP / ping | Basic host connectivity testing |
+| cURL | HTTP response and application reconnaissance |
+| Web browser | Manual web application testing |
+| SQL injection testing | Authentication and input validation testing |
+| Hash Calculator | Extraction of PDF password hashes |
+| Password Cracker | Networkwalks password recovery |
+| `password.txt` | Custom-password wordlist |
+
+
+## Reconnaissance
+
+whois.domaintools.com is a specialized lookup service used to search DNS records, the registration databases that store ownership, technical configuration, and contact details for website domain names.
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20221530.png?raw=true)
+
+
+whatweb is a popular web scanner used in cybersecurity, penetration testing, and web reconnaissance to identify the technologies running on websites.
+
+
+While Wafw00f is an open-source Python tool designed specifically to detect and fingerprint Web Application Firewalls (WAFs)
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20221822.png?raw=true)
+
+Service enumeration was attempted with:
+
+nmap -sS -sV medirozahospital.com
+
+Running nmap -sS -sV gives you the best of both worlds: efficiency/stealth during the initial discovery phase (-sS), followed by precise intelligence gathering on what those services actually are (-sV)
+
+
+HTTP reconnaissance:
+
+curl -i https://medirozahospital.com/patient/login.php
+
+This disclosed HTTP/application details including PHP, LiteSpeed, Mediroza CMS version information, and a session cookie — used for technology fingerprinting only; no standalone finding is raised solely on version disclosure.
+
+
+
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20222158.png?raw=true)
+
