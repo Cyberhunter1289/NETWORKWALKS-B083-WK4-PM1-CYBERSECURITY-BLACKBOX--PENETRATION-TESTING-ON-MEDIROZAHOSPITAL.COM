@@ -285,6 +285,9 @@ THE SAME PROCESS WAS REPEATED INDEPENDENTLY FOR REPORTS 2 & 3.
 ![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20223556.png?raw=true)
 
 
+![Image Alt](https://github.com/Cyberhunter1289/NETWORKWALKS-B083-WK4-PM1-CYBERSECURITY-BLACKBOX--PENETRATION-TESTING-ON-MEDIROZAHOSPITAL.COM/blob/main/Screenshot%202026-10-01%20225419.png?raw=true)
+
+
 
 **Recommendations:**
 - Use strong, randomly generated passwords for sensitive PDFs
